@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare - Centro Médico</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+                 body {
+             font-family: 'DM Sans', sans-serif;
+             line-height: 1.6;
+             color: #333;
+             background-color: #f8f9fa;
+             overflow-x: hidden;
+             overflow-y: hidden;
+         }
+
+        .container {
+            max-width: 90vw;
+            margin: 0 auto;
+            padding: 0 2vw;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 1.25vh 0;
+            position: relative;
+            z-index: 100;
+            border: 0.2vw solid transparent;
+            border-radius: 1.25vw;
+            margin: 1.25vw;
+            background-clip: padding-box;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            margin: -0.2vw;
+            border-radius: 1.25vw;
+            background: linear-gradient(to bottom, #eafefd 0%, #f8f9fa 100%);
+        }
+
+        .header .container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2vw;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.65vw;
+        }
+
+        .logo-icon {
+            width: 2.25vw;
+            height: 2.25vw;
+        }
+
+        .logo-text {
+            height: 2.25vw;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.9vw;
+            justify-content: center;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 0.95vw;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 0.95vw;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #4A90E2;
+        }
+
+                                     .cart-icon {
+              position: relative;
+              background: none;
+              border: none;
+              cursor: pointer;
+              color: #4A90E2;
+              transition: all 0.3s ease;
+              padding: 0.5vw;
+              width: 2.5vw;
+              height: 2.5vw;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          }
+
+          .cart-icon svg {
+              width: 100%;
+              height: 100%;
+          }
+
+          .cart-icon:hover {
+              color: #357ABD;
+              transform: scale(1.1);
+          }
+
+          .cart-badge {
+              position: absolute;
+              top: -0.2vw;
+              right: -0.2vw;
+              background: #e74c3c;
+              color: white;
+              border-radius: 50%;
+              width: 1.3vw;
+              height: 1.3vw;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.75vw;
+              font-weight: 700;
+              border: 0.15vw solid white;
+          }
+
+                   .btn-login {
+              display: none;
+          }
+
+          .btn-signup {
+              display: none;
+          }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to bottom, #a6dbe1 0%, #006070 100%);
+            padding: 11.088vh 0 9.24vh;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5vw;
+            margin: 1.5vw;
+        }
+
+                 .hero-content {
+             margin-bottom: 0;
+         }
+
+        .hero-text {
+            color: white;
+            transform: translateY(-7.5%);
+        }
+
+        .hero-title {
+            font-size: 3.85vw;
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 1.5vh;
+        }
+
+        .hero-description {
+            font-size: 1.04vw;
+            margin-bottom: 2.5vh;
+            opacity: 0.9;
+        }
+
+        .btn-appointment {
+            background: white;
+            color: #2c3e50;
+            border: none;
+            padding: 1.635vh 1.95vw;
+            border-radius: 25px;
+            font-size: 1.3vw;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-appointment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .doctor-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .doctor-photo {
+            width: 22vw;
+            height: 30vh;
+            object-fit: cover;
+            border-radius: 1.5vw;
+            box-shadow: 0 1.5vw 3vw rgba(0, 0, 0, 0.2);
+        }
+
+                 .hero-image-mobile {
+             display: none;
+         }
+
+         /* Hide hero image when not on inicio section */
+         .content-section.active ~ .hero-image-mobile {
+             display: none;
+         }
+
+         /* Show hero image only on inicio section */
+         .hero-image-mobile {
+             display: block;
+         }
+
+         .floating-image {
+             position: absolute;
+             top: 54.5%;
+             right: 15%;
+             transform: translateY(-50%);
+             width: 28.747vw;
+             height: auto;
+             z-index: 1;
+         }
+
+        /* Statistics */
+        .statistics {
+            display: flex;
+            gap: 60px;
+            margin-top: 40px;
+            justify-content: flex-start;
+            transform: translateY(-46.25%);
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.8vw;
+            font-weight: 700;
+            margin-bottom: 0.5vh;
+        }
+
+        .stat-label {
+            font-size: 1.1vw;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            position: relative;
+            z-index: 10;
+            margin-top: -8vh;
+            padding: 0 2vw;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5vw;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5vw;
+            padding: 0.01225vw 1.25vw;
+            box-shadow: 0 0.8vw 2.5vw rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            width: 100%;
+            height: 140.625%;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5vw;
+            gap: 0.5vw;
+        }
+
+        .card-title {
+            font-size: 1.15vw;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .card-icon {
+            color: #4A90E2;
+            font-size: 1.25vw;
+            font-weight: bold;
+        }
+
+        .card-tag {
+            background: #4A90E2;
+            color: white;
+            padding: 0.3vw 1vw;
+            border-radius: 15px;
+            font-size: 0.75vw;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.8vw;
+        }
+
+                 .card-gradient {
+             background: linear-gradient(to bottom right, #a6dbe1 0%, #006070 100%) !important;
+             color: white;
+             text-align: center;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+         }
+
+                                   .card-gradient .card-tag {
+              background: transparent;
+              color: white;
+              margin: 0 auto;
+              font-size: 1.05vw !important;
+              padding: 0.42vw 1.4vw !important;
+          }
+
+                                   .card-gradient .card-title {
+              color: white;
+              text-align: center;
+              margin-bottom: 0;
+              font-size: 0.805vw !important;
+          }
+
+        
+
+        .doctors-avatars {
+            display: flex;
+            gap: 0.6vw;
+            margin-bottom: 0.4vw;
+        }
+
+        .avatar {
+            width: 2.5vw;
+            height: 2.5vw;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #4A90E2;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.9vw;
+            line-height: 1.5;
+        }
+
+                                   
+
+        .btn-connect {
+            background: #2E8B57;
+            color: white;
+            border: none;
+            padding: 0.5vw 1.5vw;
+            border-radius: 20px;
+            font-size: 0.9vw;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 0.5vw;
+            transition: all 0.3s ease;
+        }
+
+        .btn-connect:hover {
+            background: #228B22;
+            transform: translateY(-2px);
+        }
+
+        .card-image {
+            position: absolute;
+            bottom: 1.2vw;
+            right: 1.2vw;
+            width: 5vw;
+            height: 3.75vw;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+                 .card-photo {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+         }
+
+                                       /* Sections - Laboratorio, Consulta, Farmacia */
+           .content-section {
+               padding: 2vh 0;
+               margin: 0;
+               border-radius: 0;
+               display: none;
+               background: white;
+           }
+
+          .content-section.active {
+              display: block;
+          }
+
+          .section-header {
+              text-align: center;
+              margin-bottom: 6vh;
+          }
+
+          .section-title {
+              font-size: 3vw;
+              color: #2c3e50;
+              margin-bottom: 1.5vh;
+          }
+
+          .section-subtitle {
+              font-size: 1.2vw;
+              color: #666;
+          }
+
+                                           /* Laboratorio Section Styles */
+                                  .lab-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3vw;
+                align-items: center;
+                padding: 0.75vh 0;
+            }
+
+                                           .lab-image {
+               width: 100%;
+               border-radius: 1.5vw;
+               overflow: hidden;
+               box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+           }
+
+           .lab-image img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+               display: block;
+           }
+
+          .lab-content {
+              padding: 0 2vw;
+          }
+
+          .lab-badge {
+              font-size: 0.9vw;
+              font-weight: 600;
+              color: #28808e;
+              text-transform: uppercase;
+              letter-spacing: 2px;
+              margin-bottom: 1.5vh;
+          }
+
+                     .lab-title {
+               font-size: 2.5vw;
+               font-weight: 700;
+               color: #2c3e50;
+               line-height: 1.2;
+               margin-bottom: 1.5vh;
+           }
+
+                     .lab-description {
+               font-size: 1.05vw;
+               color: #666;
+               line-height: 1.6;
+               margin-bottom: 2vh;
+           }
+
+                     .lab-features {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 2vw;
+               margin-bottom: 2vh;
+           }
+
+          .lab-feature {
+              display: flex;
+              gap: 1.5vw;
+              align-items: flex-start;
+          }
+
+                     .lab-feature-icon {
+               width: 3vw;
+               height: 3vw;
+               background: #e8f4f5;
+               border-radius: 50%;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               font-size: 1.5vw;
+               color: #28808e;
+               flex-shrink: 0;
+           }
+
+          .lab-feature-content h3 {
+              font-size: 1.1vw;
+              font-weight: 700;
+              color: #2c3e50;
+              margin-bottom: 0.8vh;
+          }
+
+          .lab-feature-content p {
+              font-size: 0.9vw;
+              color: #666;
+              line-height: 1.6;
+          }
+
+          .lab-buttons {
+              display: flex;
+              gap: 1.5vw;
+          }
+
+                     .btn-lab {
+               padding: 0.8vh 2vw;
+               border-radius: 30px;
+               font-size: 0.9vw;
+               font-weight: 600;
+               cursor: pointer;
+               transition: all 0.3s ease;
+               border: 2px solid #28808e;
+               background: white;
+               color: #28808e;
+           }
+
+                     .btn-lab:hover {
+               background: #28808e;
+               color: white;
+               transform: translateY(-2px);
+               box-shadow: 0 5px 15px rgba(40, 128, 142, 0.3);
+           }
+
+           /* Consulta Section Styles */
+           .consulta-section {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 3vw;
+               align-items: center;
+               padding: 0.5vh 0;
+           }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               .consulta-image {
+                     width: 100%;
+                     border-radius: 1.5vw;
+                     overflow: hidden;
+                     box-shadow: none;
+                     transform: scale(1.2) translateY(20%);
+                     transform-origin: right center;
+                 }
+
+           .consulta-image img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+               display: block;
+           }
+
+           .consulta-content {
+               padding: 0 2vw;
+           }
+
+           .consulta-badge {
+               font-size: 0.9vw;
+               font-weight: 600;
+               color: #28808e;
+               text-transform: uppercase;
+               letter-spacing: 2px;
+               margin-bottom: 1.5vh;
+           }
+
+           .consulta-title {
+               font-size: 2.5vw;
+               font-weight: 700;
+               color: #2c3e50;
+               line-height: 1.2;
+               margin-bottom: 1.5vh;
+           }
+
+           .consulta-feature-list {
+               list-style: none;
+               margin-bottom: 2vh;
+           }
+
+           .consulta-feature-item {
+               display: flex;
+               align-items: center;
+               gap: 1vw;
+               margin-bottom: 1vh;
+               font-size: 1vw;
+               color: #333;
+           }
+
+           .consulta-feature-icon {
+               width: 1.8vw;
+               height: 1.8vw;
+               background: #e8f4f5;
+               border-radius: 50%;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               font-size: 1vw;
+               color: #28808e;
+               flex-shrink: 0;
+           }
+
+           .consulta-description {
+               font-size: 1.05vw;
+               color: #666;
+               line-height: 1.6;
+               margin-bottom: 2vh;
+           }
+
+           .consulta-signature {
+               display: flex;
+               align-items: center;
+               gap: 1.5vw;
+               margin-bottom: 2vh;
+           }
+
+           .consulta-signature-name {
+               font-size: 1.3vw;
+               font-weight: 600;
+               color: #2c3e50;
+               font-style: italic;
+           }
+
+           .consulta-profile {
+               display: flex;
+               align-items: center;
+               gap: 1vw;
+           }
+
+           .consulta-profile-img {
+               width: 4vw;
+               height: 4vw;
+               border-radius: 50%;
+               overflow: hidden;
+               border: 3px solid #28808e;
+           }
+
+           .consulta-profile-img img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+           }
+
+           .consulta-profile-info {
+               display: flex;
+               flex-direction: column;
+           }
+
+           .consulta-profile-name {
+               font-size: 1vw;
+               font-weight: 700;
+               color: #2c3e50;
+               margin-bottom: 0.2vh;
+           }
+
+           .consulta-profile-title {
+               font-size: 0.85vw;
+               color: #666;
+           }
+
+           .btn-consulta {
+               padding: 1vh 2.5vw;
+               border-radius: 40px;
+               font-size: 0.9vw;
+               font-weight: 600;
+               cursor: pointer;
+               transition: all 0.3s ease;
+               border: none;
+               background: linear-gradient(to right, #28808e 0%, #1f6875 100%);
+               color: white;
+               display: flex;
+               align-items: center;
+               gap: 1vw;
+           }
+
+           .btn-consulta:hover {
+               background: linear-gradient(to right, #1f6875 0%, #28808e 100%);
+               transform: translateY(-2px);
+               box-shadow: 0 5px 15px rgba(40, 128, 142, 0.3);
+           }
+
+                       .btn-consulta-icon {
+                font-size: 1.2vw;
+            }
+
+            /* Farmacia Section Styles */
+            .farmacia-section {
+                padding: 3vh 0;
+            }
+
+            .farmacia-title {
+                font-size: 3.5vw;
+                font-weight: 700;
+                color: #28808e;
+                text-align: center;
+                margin-bottom: 1vh;
+            }
+
+            .farmacia-subtitle {
+                font-size: 1.1vw;
+                color: #666;
+                text-align: center;
+                margin-bottom: 5vh;
+            }
+
+            /* Popular Categories */
+            .popular-categories {
+                margin-bottom: 8vh;
+            }
+
+            .category-cards {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5vw;
+                margin-top: 4vh;
+            }
+
+            .category-card {
+                position: relative;
+                border-radius: 2vw;
+                overflow: hidden;
+                height: 30vh;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .category-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .category-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .category-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+                padding: 2vh 2vw;
+            }
+
+            .category-card .category-count {
+                font-size: 0.85vw;
+                color: white;
+                margin-bottom: 0.5vh;
+                font-weight: 600;
+            }
+
+            .category-card .category-name {
+                font-size: 1.8vw;
+                font-weight: 700;
+                color: white;
+                margin-bottom: 1.5vh;
+            }
+
+            .category-card .btn-explore {
+                background: #28808e;
+                color: white;
+                border: none;
+                padding: 0.8vh 1.5vw;
+                border-radius: 30px;
+                font-size: 0.9vw;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .category-card .btn-explore:hover {
+                background: #1f6875;
+                transform: translateY(-2px);
+            }
+
+            /* New Products */
+            .new-products {
+                margin-top: 8vh;
+            }
+
+            .product-cards {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2vw;
+                margin-top: 4vh;
+            }
+
+            .product-card {
+                background: white;
+                border: 1px solid #e0e0e0;
+                border-radius: 1.5vw;
+                padding: 2vh;
+                text-align: center;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .product-card img {
+                width: 100%;
+                height: 18vh;
+                object-fit: cover;
+                border-radius: 1vw;
+                margin-bottom: 1.5vh;
+            }
+
+            .product-card .product-name {
+                font-size: 1vw;
+                font-weight: 700;
+                color: #2c3e50;
+                margin-bottom: 0.5vh;
+            }
+
+            .product-card .product-sku {
+                font-size: 0.8vw;
+                color: #999;
+                margin-bottom: 1.5vh;
+            }
+
+            .product-card .btn-buy {
+                background: #28808e;
+                color: white;
+                border: none;
+                padding: 0.8vh 1.5vw;
+                border-radius: 30px;
+                font-size: 0.85vw;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+
+                         .product-card .btn-buy:hover {
+                 background: #1f6875;
+                 transform: translateY(-2px);
+             }
+
+                           /* Hero Farmacia Section - New Launch */
+              .farmacia-hero {
+                  position: relative;
+                  background: url('https://i.imgur.com/29ryacS.jpeg') center/cover;
+                  background-blur: 20px;
+                  padding: 6vh 0;
+                  border-radius: 2vw;
+                  margin-bottom: 6vh;
+                  overflow: hidden;
+              }
+
+             .farmacia-hero::before {
+                 content: '';
+                 position: absolute;
+                 top: 0;
+                 left: 0;
+                 right: 0;
+                 bottom: 0;
+                 background: rgba(0, 96, 112, 0.7);
+                 backdrop-filter: blur(10px);
+             }
+
+             .farmacia-hero-content {
+                 position: relative;
+                 z-index: 2;
+                 display: grid;
+                 grid-template-columns: 1fr 1fr;
+                 gap: 4vw;
+                 align-items: center;
+             }
+
+             .farmacia-hero-left h3 {
+                 font-size: 1vw;
+                 color: white;
+                 font-weight: 600;
+                 letter-spacing: 3px;
+                 margin-bottom: 1.5vh;
+                 text-transform: uppercase;
+             }
+
+             .farmacia-hero-left h2 {
+                 font-size: 3.5vw;
+                 font-weight: 700;
+                 color: white;
+                 line-height: 1.2;
+                 margin-bottom: 1vh;
+             }
+
+             .farmacia-hero-collection {
+                 font-size: 1.2vw;
+                 color: white;
+                 margin-bottom: 3vh;
+                 font-weight: 500;
+             }
+
+             .btn-buy-now {
+                 background: #28808e;
+                 color: white;
+                 border: none;
+                 padding: 1.2vh 3vw;
+                 border-radius: 30px;
+                 font-size: 1vw;
+                 font-weight: 600;
+                 cursor: pointer;
+                 transition: all 0.3s ease;
+             }
+
+             .btn-buy-now:hover {
+                 background: #1f6875;
+                 transform: translateY(-2px);
+             }
+
+             .farmacia-hero-right {
+                 position: relative;
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+             }
+
+             .wheelchair-container {
+                 position: relative;
+             }
+
+             .wheelchair-img {
+                 width: 100%;
+                 max-width: 500px;
+                 height: auto;
+                 filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+             }
+
+             .product-info-box {
+                 position: absolute;
+                 background: white;
+                 padding: 1vh 1.5vw;
+                 border-radius: 15px;
+                 font-size: 0.9vw;
+                 font-weight: 600;
+                 color: #2c3e50;
+                 box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+             }
+
+             .product-info-price {
+                 top: 10%;
+                 left: -15%;
+             }
+
+             .product-info-weight {
+                 top: 50%;
+                 right: -10%;
+             }
+
+             .product-info-sku {
+                 bottom: 15%;
+                 left: -5%;
+             }
+
+             .farmacia-side-ads {
+                 display: flex;
+                 flex-direction: column;
+                 gap: 2vh;
+             }
+
+             .side-ad-card {
+                 background: linear-gradient(135deg, #e8f4f5 0%, #d0e8eb 100%);
+                 padding: 2vh 2vw;
+                 border-radius: 1.5vw;
+                 position: relative;
+             }
+
+             .side-ad-badge {
+                 font-size: 0.75vw;
+                 font-weight: 600;
+                 color: #28808e;
+                 margin-bottom: 1vh;
+                 text-transform: uppercase;
+                 letter-spacing: 1px;
+             }
+
+             .side-ad-title {
+                 font-size: 1vw;
+                 font-weight: 700;
+                 color: #2c3e50;
+                 margin-bottom: 0.5vh;
+             }
+
+             .side-ad-price {
+                 font-size: 1.3vw;
+                 font-weight: 700;
+                 color: #28808e;
+                 margin-bottom: 0.3vh;
+             }
+
+             .side-ad-condition {
+                 font-size: 0.75vw;
+                 color: #666;
+                 margin-bottom: 1.5vh;
+             }
+
+             .btn-order-now {
+                 background: #28808e;
+                 color: white;
+                 border: none;
+                 padding: 0.8vh 1.5vw;
+                 border-radius: 25px;
+                 font-size: 0.85vw;
+                 font-weight: 600;
+                 cursor: pointer;
+                 transition: all 0.3s ease;
+             }
+
+             .btn-order-now:hover {
+                 background: #1f6875;
+                 transform: translateY(-2px);
+             }
+
+             .side-ad-image {
+                 position: absolute;
+                 right: 0;
+                 top: 50%;
+                 transform: translateY(-50%);
+                 width: 120px;
+                 height: auto;
+             }
+
+           /* Responsive Design - Solo para móviles y tablets */
+        @media (max-width: 1024px) {
+            /* Header responsive */
+            .header {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logo-text {
+                height: 25px;
+            }
+
+            .nav {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-link {
+                font-size: 14px;
+            }
+
+            .cart-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .cart-badge {
+                width: 18px;
+                height: 18px;
+                font-size: 11px;
+                border-width: 2px;
+            }
+
+            .btn-login, .btn-signup {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
+                                                                                                                                                                                                                       @media (max-width: 768px) {
+              .header .container {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0px;
+              }
+             
+             .logo {
+                 order: 1;
+                 justify-content: center;
+             }
+
+             .logo-icon {
+                 width: 46px;
+                 height: 46px;
+             }
+
+             .logo-text {
+                 height: 33px;
+             }
+            
+            .nav {
+                order: 3;
+                gap: 0px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+             
+            .nav-link {
+                font-size: 12px;
+            }
+            
+            .header-buttons {
+                order: 2;
+                gap: 0px;
+                width: 100%;
+                justify-content: flex-end;
+                padding: 0px;
+            }
+            
+            .btn-login, .btn-signup {
+                display: none;
+            }
+            
+                                                                                                       .cart-icon {
+                   width: 66px;
+                   height: 66px;
+                   padding: 8px;
+                   margin-top: -31px;
+               }
+              
+              .cart-badge {
+                  width: 24px;
+                  height: 24px;
+                  font-size: 13px;
+                  top: -4px;
+                  right: -4px;
+              }
+            
+            .container {
+                max-width: 95vw;
+                padding: 0 15px;
+            }
+            
+                         /* Hero Section */
+             .hero {
+                 padding: 30px 0 25px;
+                 margin: 10px;
+                 border-radius: 15px;
+                 background: linear-gradient(to bottom, #a6dbe1 0%, #006070 100%);
+                 position: relative;
+                 overflow: hidden;
+             }
+
+             body {
+                 overflow-x: hidden;
+                 overflow-y: hidden;
+             }
+
+             html {
+                 overflow-x: hidden;
+                 overflow-y: hidden;
+             }
+
+                         .floating-image {
+                 display: none;
+             }
+
+                           .hero-image-mobile {
+                  display: block;
+                  position: absolute;
+                  top: 70%;
+                  left: 50%;
+                  transform: translateX(-57.5%);
+                  padding: 0 20px;
+                  z-index: 5;
+                  width: 100%;
+                  overflow: hidden;
+              }
+
+                           .hero-image-mobile .floating-image {
+                  display: block;
+                  position: relative;
+                  width: 100%;
+                  transform: none;
+                  max-width: 300px;
+                  margin: 0 auto;
+              }
+              
+              .hero-content {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+                  text-align: center;
+              }
+
+            .hero-text {
+                transform: none;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+                line-height: 1.3;
+                margin-bottom: 15px;
+            }
+            
+            .hero-description {
+                font-size: 15px;
+                margin-bottom: 20px;
+                opacity: 1;
+            }
+            
+            .btn-appointment {
+                padding: 12px 25px;
+                font-size: 14px;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            
+            /* Statistics */
+            .statistics {
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+                justify-content: space-around;
+                margin-top: 25px;
+                padding: 0 10px;
+                transform: none;
+            }
+            
+            .stat-item {
+                text-align: center;
+                flex: 1;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+                margin-bottom: 3px;
+            }
+            
+            .stat-label {
+                font-size: 11px;
+                opacity: 1;
+            }
+            
+                         .cards-section {
+                 margin-top: -30px;
+                 transform: translateY(0%);
+                 padding: 0 15px;
+             }
+            
+                                                                                                                                                           .cards-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+                
+                .card {
+                    padding: 10px;
+                    border-radius: 15px;
+                    height: auto;
+                    min-height: 80px;
+                }
+                
+                .card:nth-child(n+2) {
+                    display: none;
+                }
+                
+                .card-title {
+                    font-size: 14px;
+                    line-height: 1.3;
+                }
+             
+             .card-description {
+                 font-size: 13px;
+             }
+             
+             .btn-connect {
+                 padding: 10px 20px;
+                 font-size: 14px;
+             }
+             
+             .doctor-photo {
+                 width: 250px;
+                 height: 320px;
+             }
+             
+             .background-shape {
+                 width: 150px;
+                 height: 150px;
+                 top: -30px;
+                 right: -30px;
+             }
+
+             /* Laboratorio Section */
+             .lab-section {
+                 grid-template-columns: 1fr;
+                 gap: 20px;
+                 padding: 20px 0;
+             }
+
+             .lab-image {
+                 border-radius: 10px;
+             }
+
+             .lab-content {
+                 padding: 0;
+             }
+
+             .lab-badge {
+                 font-size: 11px;
+                 margin-bottom: 10px;
+             }
+
+             .lab-title {
+                 font-size: 22px;
+                 margin-bottom: 10px;
+             }
+
+             .lab-description {
+                 font-size: 14px;
+                 margin-bottom: 20px;
+             }
+
+             .lab-features {
+                 grid-template-columns: 1fr;
+                 gap: 15px;
+                 margin-bottom: 20px;
+             }
+
+             .lab-feature {
+                 gap: 12px;
+             }
+
+             .lab-feature-icon {
+                 width: 45px;
+                 height: 45px;
+                 font-size: 20px;
+                 flex-shrink: 0;
+             }
+
+             .lab-feature-content h3 {
+                 font-size: 14px;
+                 margin-bottom: 5px;
+             }
+
+             .lab-feature-content p {
+                 font-size: 12px;
+             }
+
+             .lab-buttons {
+                 flex-direction: column;
+                 gap: 10px;
+             }
+
+             .btn-lab {
+                 width: 100%;
+                 padding: 12px 20px;
+                 font-size: 14px;
+             }
+
+             /* Consulta Section */
+             .consulta-section {
+                 grid-template-columns: 1fr;
+                 gap: 20px;
+                 padding: 20px 0;
+             }
+
+             .consulta-content {
+                 padding: 0;
+                 order: 2;
+             }
+
+             .consulta-image {
+                 order: 1;
+                 transform: none !important;
+                 border-radius: 10px;
+                 margin-bottom: 10px;
+             }
+
+             .consulta-badge {
+                 font-size: 11px;
+                 margin-bottom: 10px;
+             }
+
+             .consulta-title {
+                 font-size: 22px;
+                 margin-bottom: 10px;
+             }
+
+             .consulta-feature-list {
+                 margin-bottom: 15px;
+             }
+
+             .consulta-feature-item {
+                 font-size: 13px;
+                 margin-bottom: 10px;
+             }
+
+             .consulta-feature-icon {
+                 width: 28px;
+                 height: 28px;
+                 font-size: 14px;
+             }
+
+             .consulta-description {
+                 font-size: 14px;
+                 margin-bottom: 20px;
+             }
+
+             .btn-consulta {
+                 width: 100%;
+                 padding: 12px 20px;
+                 font-size: 14px;
+                 justify-content: center;
+             }
+
+             .floating-image {
+                 display: none;
+             }
+
+                           .hero-image-mobile {
+                  display: block;
+                  position: absolute;
+                  top: 70%;
+                  left: 50%;
+                  transform: translateX(-57.5%);
+                  padding: 0 20px;
+                  z-index: 5;
+                  width: 100%;
+                  overflow: hidden;
+              }
+
+                                                       .hero-image-mobile .floating-image {
+                   display: block;
+                   position: relative;
+                   width: 100%;
+                   transform: none;
+                   max-width: 300px;
+                   margin: 0 auto;
+               }
+
+               /* Farmacia Section */
+              .farmacia-section {
+                  padding: 20px 0;
+              }
+
+              .farmacia-title {
+                  font-size: 26px;
+                  margin-bottom: 8px;
+              }
+
+              .farmacia-subtitle {
+                  font-size: 13px;
+                  margin-bottom: 25px;
+              }
+
+              .popular-categories {
+                  margin-bottom: 30px;
+              }
+
+              .category-cards {
+                  grid-template-columns: 1fr;
+                  gap: 15px;
+              }
+
+              .category-card {
+                  height: 180px;
+                  border-radius: 15px;
+              }
+
+              .category-overlay {
+                  padding: 15px;
+              }
+
+              .category-card .category-count {
+                  font-size: 11px;
+                  margin-bottom: 5px;
+              }
+
+              .category-card .category-name {
+                  font-size: 18px;
+                  margin-bottom: 10px;
+              }
+
+              .category-card .btn-explore {
+                  padding: 6px 12px;
+                  font-size: 12px;
+              }
+
+              .new-products {
+                  margin-top: 30px;
+              }
+
+              .product-cards {
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 12px;
+              }
+
+              .product-card {
+                  padding: 15px;
+              }
+
+              .product-card img {
+                  height: 120px;
+                  margin-bottom: 10px;
+              }
+
+              .product-card .product-name {
+                  font-size: 13px;
+                  margin-bottom: 4px;
+              }
+
+              .product-card .product-sku {
+                  font-size: 10px;
+                  margin-bottom: 10px;
+              }
+
+              .product-card .btn-buy {
+                  padding: 6px 12px;
+                  font-size: 11px;
+              }
+          }
+
+                    @media (max-width: 480px) {
+            /* Móviles pequeños - Optimizaciones adicionales */
+            .hero-title {
+                font-size: 22px;
+                line-height: 1.2;
+            }
+            
+            .hero-description {
+                font-size: 13px;
+            }
+            
+            .stat-number {
+                font-size: 18px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .statistics {
+                padding: 0 5px;
+            }
+
+            .stat-item {
+                padding: 0 3px;
+            }
+            
+            .card {
+                padding: 12px;
+                border-radius: 12px;
+            }
+            
+            .card-title {
+                font-size: 14px;
+            }
+            
+            .nav {
+                gap: 8px;
+            }
+             
+            .nav-link {
+                font-size: 12px;
+            }
+            
+            .header-buttons {
+                gap: 5px;
+            }
+
+            .btn-login, .btn-signup {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .cart-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .cart-badge {
+                width: 16px;
+                height: 16px;
+                font-size: 10px;
+            }
+
+            .lab-title, .consulta-title {
+                font-size: 20px;
+            }
+
+            .lab-badge, .consulta-badge {
+                font-size: 10px;
+            }
+
+            .farmacia-title {
+                font-size: 22px;
+            }
+
+            .product-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                height: 160px;
+            }
+
+            .category-card .category-name {
+                font-size: 16px;
+            }
+        }
+
+        /* Media Query para resoluciones similares a 390x844 */
+        @media (max-width: 400px) and (max-height: 900px) {
+            .hero {
+                padding: 20px 0 15px;
+                margin: 5px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+                line-height: 1.2;
+                margin-bottom: 10px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+
+            .btn-appointment {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .statistics {
+                margin-top: 15px;
+                gap: 8px;
+            }
+
+            .stat-number {
+                font-size: 16px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .hero-image-mobile {
+                top: 55%;
+                transform: translateX(-55%);
+            }
+
+            .hero-image-mobile .floating-image {
+                max-width: 325px;
+            }
+
+            .cards-section {
+                margin-top: -20px;
+                padding: 0 10px;
+            }
+
+            .card {
+                padding: 8px;
+                min-height: 60px;
+            }
+
+            .card-title {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+        }
+
+        /* Media Query para resoluciones similares a 360x740 */
+        @media (max-width: 370px) and (max-height: 750px) {
+            .hero {
+                padding: 15px 0 10px;
+                margin: 3px;
+            }
+
+            .hero-title {
+                font-size: 20px;
+                line-height: 1.1;
+                margin-bottom: 8px;
+            }
+
+            .hero-description {
+                font-size: 11px;
+                margin-bottom: 12px;
+            }
+
+            .btn-appointment {
+                padding: 8px 16px;
+                font-size: 11px;
+            }
+
+            .statistics {
+                margin-top: 12px;
+                gap: 6px;
+            }
+
+            .stat-number {
+                font-size: 14px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            .hero-image-mobile {
+                top: 53%;
+                transform: translateX(-54.5%);
+            }
+
+            .hero-image-mobile .floating-image {
+                max-width: 364px;
+            }
+
+            .cards-section {
+                margin-top: -15px;
+                padding: 0 8px;
+            }
+
+            .card {
+                padding: 6px;
+                min-height: 50px;
+            }
+
+            .card-title {
+                font-size: 10px;
+                line-height: 1.1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.imgur.com/hv40qeH.png" alt="Logo" class="logo-icon">
+                <img src="https://i.imgur.com/eHQzHAz.png" alt="Healthcare" class="logo-text">
+            </div>
+                                                   <nav class="nav">
+                 <a href="#inicio" class="nav-link nav-section" data-section="inicio">Inicio</a>
+                 <a href="#laboratorio" class="nav-link nav-section" data-section="laboratorio">Laboratorio</a>
+                 <a href="#consulta" class="nav-link nav-section" data-section="consulta">Consulta</a>
+                 <a href="#farmacia" class="nav-link nav-section" data-section="farmacia">Farmacia</a>
+             </nav>
+                           <div class="header-buttons">
+                  <button class="cart-icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7 18C5.89 18 5 18.89 5 20C5 21.1 5.89 22 7 22C8.1 22 9 21.1 9 20C9 18.89 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.89 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.95 12.58 17.3 11.97L20.88 5.5C21.25 4.85 20.73 4 19.96 4H5.21L4.27 2M17 18C15.89 18 15 18.89 15 20C15 21.1 15.89 22 17 22C18.1 22 19 21.1 19 20C19 18.89 18.1 18 17 18Z"/>
+                      </svg>
+                      <span class="cart-badge">3</span>
+                  </button>
+                  <button class="btn-login">Ingresar</button>
+                  <button class="btn-signup">Registrarse</button>
+              </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Tu <strong>salud</strong> es<br>nuestra prioridad<br>y compromiso</h1>
+                    <p class="hero-description">Atención médica de calidad 24/7 con especialistas<br>capacitados. Tu bienestar es nuestra misión.</p>
+                    <button class="btn-appointment">Agenda tu cita ahora</button>
+                </div>
+            </div>
+            
+            <!-- Statistics Bar -->
+            <div class="statistics">
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Servicio de Emergencia</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Años de experiencia</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">90k+</div>
+                    <div class="stat-label">Pacientes atendidos</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Hero Image (outside hero container for mobile) -->
+    <div class="hero-image-mobile">
+        <img src="https://i.imgur.com/7goLHZW.png" alt="Hero Image" class="floating-image">
+    </div>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="container">
+            <div class="cards-grid">
+                                 <!-- Card 1: Latest Visited doctor -->
+                 <div class="card">
+                     <div class="card-header">
+                         <h3 class="card-title">Productos médicos destacados</h3>
+                         <div class="card-icon">→</div>
+                     </div>
+                 </div>
+
+                                                                   <!-- Card 2: Our Specialist doctor -->
+                  <div class="card card-gradient">
+                      <div class="card-tag">Doctores</div>
+                      <h3 class="card-title">Especialistas en tu cuidado</h3>
+                  </div>
+
+                                 <!-- Card 3: Connect with our professional doctor -->
+                 <div class="card">
+                     <h3 class="card-title">Equipos de última generación</h3>
+                 </div>
+
+                 <!-- Card 4: Duplicate of Card 1 -->
+                 <div class="card">
+                     <div class="card-header">
+                         <h3 class="card-title">Cuidado integral</h3>
+                         <div class="card-icon">→</div>
+                     </div>
+                 </div>
+                         </div>
+         </div>
+     </section>
+
+     <!-- Laboratorio Section -->
+     <section id="laboratorio" class="content-section">
+         <div class="container">
+             <div class="lab-section">
+                                   <div class="lab-image">
+                      <img src="https://i.imgur.com/29ryacS.jpeg" alt="Laboratorio médico">
+                  </div>
+                 <div class="lab-content">
+                     <div class="lab-badge">ACERCA DE NOSOTROS</div>
+                     <h2 class="lab-title">Empleamos Última Tecnología de Investigación y Compañía</h2>
+                     <p class="lab-description">Contamos con equipos de última generación y un equipo de profesionales altamente capacitados para brindar análisis clínicos de la más alta calidad y precisión.</p>
+                     
+                     <div class="lab-features">
+                         <div class="lab-feature">
+                             <div class="lab-feature-icon">🧪</div>
+                             <div class="lab-feature-content">
+                                 <h3>Técnico de Laboratorio Médico</h3>
+                                 <p>Profesionales especializados con amplia experiencia en análisis clínicos avanzados.</p>
+                             </div>
+                         </div>
+                         <div class="lab-feature">
+                             <div class="lab-feature-icon">📋</div>
+                             <div class="lab-feature-content">
+                                 <h3>Gestión de Certificaciones NABL</h3>
+                                 <p>Cumplimos con los más altos estándares de calidad y certificaciones internacionales.</p>
+                             </div>
+                         </div>
+                     </div>
+                     
+                     <div class="lab-buttons">
+                         <button class="btn-lab">Más Servicios</button>
+                         <button class="btn-lab">Leer Más</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+
+     <!-- Consulta Section -->
+     <section id="consulta" class="content-section">
+         <div class="container">
+             <div class="consulta-section">
+                                   <div class="consulta-content">
+                      <div class="consulta-badge">SERVICIOS MÉDICOS</div>
+                      <h2 class="consulta-title">Consulta Médica de Excelencia con Atención Personalizada</h2>
+                      
+                      <ul class="consulta-feature-list">
+                          <li class="consulta-feature-item">
+                              <div class="consulta-feature-icon">✓</div>
+                              <span>Reserva tu Cita en Línea 24/7</span>
+                          </li>
+                          <li class="consulta-feature-item">
+                              <div class="consulta-feature-icon">✓</div>
+                              <span>Médicos Certificados y Especializados</span>
+                          </li>
+                          <li class="consulta-feature-item">
+                              <div class="consulta-feature-icon">✓</div>
+                              <span>Diagnóstico Preciso y Tratamiento Efectivo</span>
+                          </li>
+                          <li class="consulta-feature-item">
+                              <div class="consulta-feature-icon">✓</div>
+                              <span>Equipos de Última Generación</span>
+                          </li>
+                      </ul>
+                      
+                                             <p class="consulta-description">
+                           Nuestro centro médico ofrece atención integral con especialistas en diversas áreas. Contamos con modernas instalaciones y tecnología avanzada para brindarte el mejor cuidado de tu salud. Tu bienestar es nuestra prioridad.
+                       </p>
+                       
+                       <button class="btn-consulta">
+                           <span class="btn-consulta-icon">📅</span>
+                           <span>Agendar Consulta Ahora</span>
+                           <span>→</span>
+                       </button>
+                  </div>
+                                   <div class="consulta-image">
+                      <img src="https://i.imgur.com/CLLVlkw.png" alt="Doctores">
+                  </div>
+             </div>
+         </div>
+     </section>
+
+           <!-- Farmacia Section -->
+      <section id="farmacia" class="content-section">
+          <div class="container">
+              <div class="farmacia-section">
+                  <!-- Popular Categories Section -->
+                 <div class="popular-categories">
+                     <h2 class="farmacia-title">Categorías Populares</h2>
+                     <p class="farmacia-subtitle">Descubre nuestras categorías de equipos médicos más compradas, confiadas por tiendas DME en todo el país</p>
+                     
+                                           <div class="category-cards">
+                          <div class="category-card">
+                              <img src="https://i.imgur.com/29ryacS.jpeg" alt="DME & Retail">
+                              <div class="category-overlay">
+                                  <div class="category-count">100+ PRODUCTOS</div>
+                                  <div class="category-name">DME & Retail</div>
+                                  <button class="btn-explore">Explorar Más</button>
+                              </div>
+                          </div>
+                          
+                          <div class="category-card">
+                              <img src="https://i.imgur.com/CLLVlkw.png" alt="Cirugía Ortopédica">
+                              <div class="category-overlay">
+                                  <div class="category-count">400+ PRODUCTOS</div>
+                                  <div class="category-name">Cirugía Ortopédica</div>
+                                  <button class="btn-explore">Explorar Más</button>
+                              </div>
+                          </div>
+                          
+                          <div class="category-card">
+                              <img src="https://i.imgur.com/zuYgLJ7.png" alt="Gestión del Dolor">
+                              <div class="category-overlay">
+                                  <div class="category-count">400+ PRODUCTOS</div>
+                                  <div class="category-name">Gestión del Dolor</div>
+                                  <button class="btn-explore">Explorar Más</button>
+                              </div>
+                          </div>
+                      </div>
+                 </div>
+                 
+                 <!-- New Products Section -->
+                 <div class="new-products">
+                     <h2 class="farmacia-title">Productos Nuevos</h2>
+                     <p class="farmacia-subtitle">Productos de alto rendimiento confiados por profesionales DME ahora disponibles para tu tienda DME</p>
+                     
+                                           <div class="product-cards">
+                          <div class="product-card">
+                              <img src="https://i.imgur.com/29ryacS.jpeg" alt="Equipo Hospitalario">
+                              <div class="product-name">Equipo Hospitalario</div>
+                              <div class="product-sku">POV10245WEH</div>
+                              <button class="btn-buy">Comprar Ahora</button>
+                          </div>
+                          
+                          <div class="product-card">
+                              <img src="https://i.imgur.com/CLLVlkw.png" alt="Presión Arterial">
+                              <div class="product-name">Presión Arterial</div>
+                              <div class="product-sku">MOV2346BRT</div>
+                              <button class="btn-buy">Comprar Ahora</button>
+                          </div>
+                          
+                          <div class="product-card">
+                              <img src="https://i.imgur.com/zuYgLJ7.png" alt="Accesorios">
+                              <div class="product-name">Accesorios</div>
+                              <div class="product-sku">IOV27868WE</div>
+                              <button class="btn-buy">Comprar Ahora</button>
+                          </div>
+                          
+                          <div class="product-card">
+                              <img src="https://i.imgur.com/hv40qeH.png" alt="Personal">
+                              <div class="product-name">Personal</div>
+                              <div class="product-sku">XOV2578ER</div>
+                              <button class="btn-buy">Comprar Ahora</button>
+                          </div>
+                          
+                          <div class="product-card">
+                              <img src="https://i.imgur.com/eHQzHAz.png" alt="Vida Independiente">
+                              <div class="product-name">Vida Independiente</div>
+                              <div class="product-sku">VOV4568MK</div>
+                              <button class="btn-buy">Comprar Ahora</button>
+                          </div>
+                      </div>
+                 </div>
+             </div>
+         </div>
+           </section>
+
+             <script>
+          // Navigation functionality
+         const navLinks = document.querySelectorAll('.nav-section');
+         const sections = document.querySelectorAll('.content-section');
+         const hero = document.querySelector('.hero');
+         const cardsSection = document.querySelector('.cards-section');
+
+         navLinks.forEach(link => {
+             link.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 const sectionId = link.getAttribute('data-section');
+                 const heroImageMobile = document.querySelector('.hero-image-mobile');
+                 
+                 // Hide all content sections
+                 sections.forEach(section => {
+                     section.classList.remove('active');
+                 });
+                 
+                 // Show/hide hero and cards based on section
+                 if (sectionId === 'inicio' || sectionId === 'nosotros' || sectionId === 'servicios' || sectionId === 'blog') {
+                     if (hero) hero.style.display = 'block';
+                     if (cardsSection) cardsSection.style.display = 'block';
+                     if (heroImageMobile) heroImageMobile.style.display = 'block';
+                 } else {
+                     if (hero) hero.style.display = 'none';
+                     if (cardsSection) cardsSection.style.display = 'none';
+                     if (heroImageMobile) heroImageMobile.style.display = 'none';
+                 }
+                 
+                 // Show selected section
+                 if (sectionId === 'laboratorio') {
+                     document.getElementById('laboratorio').classList.add('active');
+                 } else if (sectionId === 'consulta') {
+                     document.getElementById('consulta').classList.add('active');
+                 } else if (sectionId === 'farmacia') {
+                     document.getElementById('farmacia').classList.add('active');
+                 }
+                 
+                 // Scroll to top
+                 window.scrollTo({ top: 0, behavior: 'smooth' });
+             });
+         });
+     </script>
+</body>
+</html>
