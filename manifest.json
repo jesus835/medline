@@ -1,0 +1,122 @@
+{
+  "manifest_version": 3,
+  "name": "Medline - Centro Médico",
+  "short_name": "Medline",
+  "description": "Centro médico con servicios de laboratorio, consulta y farmacia. Reserva citas y compra productos médicos.",
+  "version": "1.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#28808e",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["health", "medical", "shopping"],
+  "icons": [
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "https://i.imgur.com/hv40qeH.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agendar Cita",
+      "short_name": "Cita",
+      "description": "Agendar una cita médica",
+      "url": "/#consulta",
+      "icons": [
+        {
+          "src": "https://i.imgur.com/hv40qeH.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Farmacia",
+      "short_name": "Farmacia",
+      "description": "Ver productos médicos",
+      "url": "/#farmacia",
+      "icons": [
+        {
+          "src": "https://i.imgur.com/hv40qeH.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Laboratorio",
+      "short_name": "Lab",
+      "description": "Servicios de laboratorio",
+      "url": "/#laboratorio",
+      "icons": [
+        {
+          "src": "https://i.imgur.com/hv40qeH.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://medline.com"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://script.google.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
